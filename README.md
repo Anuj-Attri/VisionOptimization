@@ -1,4 +1,6 @@
 # Image Classification Pytorch
+## Description
+Using baseline models for removal of parameters to improve model efficiency on limited hardware and edge devices.
 
 ## Dataset
 * CIFAR-10
@@ -8,12 +10,25 @@
 * PyTorch: 1.7.1
 * PyTorch-Lightning: 1.1.6
 
-## Summary on ViT Optimizations
+## Project milestones and their completion status
 1. Architecture Adjustment: The sequence of F.gelu() followed by nn.Dropout() was adjusted. Reversing this order led to gradients becoming zero, hindering the learning process.
 2. Performance on CIFAR-10: For a model with N_LAYERS = 6, HIDDEN_SIZE = 384, and N_HEADS = 6, it was found that using a PATCH_SIZE = 8 and even more so with PATCH_SIZE = 4 led to performance improvements compared to using PATCH_SIZE = 16.
 3. Comparison on CIFAR-10: Smaller-sized models compared to the standard ViT-Base model performed better on CIFAR-10.
 
+## Repository and code structure
+Each sub-directory is labeled with its purpose, holding a jupyter notebook that can be run on any GPU support device.
+* Analysis Notebooks contain profiling and analysis done on various baseline models.
+* Model_architectures include models that were tested during analysis and their architectures visualized as an image.
+* Results includes two folders, storing two notebooks: ResNet with 4.5M parameters and ViT with 5.4M parameters.
 
+## Example usage and requirements
+The notebooks can be run directly with any GPU supported device.
+Please install latest versions of the following:
+* Torchinfo
+* Torchviz
+* Einops
+* Timm
+  
 ## Results(Accuracy)
 
 |Models|CIFAR-10|#Params|
