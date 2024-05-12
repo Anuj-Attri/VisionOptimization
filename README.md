@@ -8,36 +8,47 @@
 * PyTorch: 1.7.1
 * PyTorch-Lightning: 1.1.6
 
+## Summary on ViT Optimizations
+1. Architecture Adjustment: The sequence of F.gelu() followed by nn.Dropout() was adjusted. Reversing this order led to gradients becoming zero, hindering the learning process.
+2. Performance on CIFAR-10: For a model with N_LAYERS = 6, HIDDEN_SIZE = 384, and N_HEADS = 6, it was found that using a PATCH_SIZE = 8 and even more so with PATCH_SIZE = 4 led to performance improvements compared to using PATCH_SIZE = 16.
+3. Comparison on CIFAR-10: Smaller-sized models compared to the standard ViT-Base model performed better on CIFAR-10.
+
 
 ## Results(Accuracy)
 
 |Models|CIFAR-10|CIFAR-100|#Params|
 |:--:|:--:|:--:|:--:|
 |[AllCNNC](https://arxiv.org/abs/1412.6806)|93.640|72.040|1.4M|
-|[VGG16](https://arxiv.org/abs/1409.1556)|-|-|-|
 |[ResNet18](https://arxiv.org/abs/1512.03385)|94.465|74.465|11.2M|
 |[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
 |[PreAct34](https://arxiv.org/abs/1603.05027)|95.010|75.715|21.3M|
 |[PreAct50](https://arxiv.org/abs/1603.05027)|94.970|76.685|23.5M|
+|[ViT](https://arxiv.org/abs/2010.11929)|--|86.400|--|
 
 
-## Hyperparameters
-|Params|Values|
-|:--|:--:|
-|Epochs| 200|
-|Batch Size| 128|
-|Learning Rate| 0.1|
-|LR Milestones| [100, 150]|
-|LR Decay Rate| 0.1|
-|Weight Decay| 1e-4|
+## Hyperparameters for Proposed ViT
 
-* For the fair comparison, all experiments are done under the same experimental settings.
+* DROP_PROB = 0.1
+* N_LAYERS = 6
+* HIDDEN_SIZE = 384
+* MLP_SIZE = 384
+* N_HEADS = 12
+* PATCH_SIZE = 4
+* BASE_LR = 1e-3
+* BETA1 = 0.9
+* BETA2 = 0.999
+* WEIGHT_DECAY = 5e-5
+* WARMUP_EPOCHS = 5
+* SMOOTHING = 0.1
+* CUTMIX = False
+* CUTOUT = False
+* HIDE_AND_SEEK = False
+* BATCH_SIZE = 2048
+* N_EPOCHS = 300
 
-## Future Work
-* Spatial dimensions of tensors right before GAP should be 4x4 rather than 2x2.
-* No bias term used for Squeeze-and-Excitation Module.
-* Use dropout right after activation.(in WRN, at least.)
-    * If apply dropout right after conv, the performance degrades by 1-2% in CIFAR-100
+## Notes
+* Training notebooks show development in v100 GPU due to its faster efficiency compared to the consumer friendly RTX Models.
+* To avoid fork errors, please define `num_workers=0` in pytorch dataloaders.
 
 ## References
 * All-CNN-C(+BN)[[Springenberg, J.(ICLRW'15)]](https://arxiv.org/abs/1412.6806)
