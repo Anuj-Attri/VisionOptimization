@@ -16,14 +16,11 @@
 
 ## Results(Accuracy)
 
-|Models|CIFAR-10|CIFAR-100|#Params|
-|:--:|:--:|:--:|:--:|
-|[AllCNNC](https://arxiv.org/abs/1412.6806)|93.640|72.040|1.4M|
-|[ResNet18](https://arxiv.org/abs/1512.03385)|94.465|74.465|11.2M|
-|[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
-|[PreAct34](https://arxiv.org/abs/1603.05027)|95.010|75.715|21.3M|
-|[PreAct50](https://arxiv.org/abs/1603.05027)|94.970|76.685|23.5M|
-|[ViT](https://arxiv.org/abs/2010.11929)|--|86.400|--|
+|Models|CIFAR-10|#Params|
+|:--:|:--:|:--:|
+|[AllCNNC](https://arxiv.org/abs/1412.6806)|93.640|1.4M|
+|[ResNet](https://arxiv.org/abs/1512.03385)|94.465|4.47M|
+|[ViT](https://arxiv.org/abs/2010.11929)|86.400|--|
 
 
 ## Hyperparameters for Proposed ViT
@@ -49,6 +46,7 @@
 ## Notes
 * Training notebooks show development in v100 GPU due to its faster efficiency compared to the consumer friendly RTX Models.
 * To avoid fork errors, please define `num_workers=0` in pytorch dataloaders.
+* SOTA Models were considered for pruning but ResNet architecture was chosen for ease of deployment.
 
 ## References
 * All-CNN-C(+BN)[[Springenberg, J.(ICLRW'15)]](https://arxiv.org/abs/1412.6806)
