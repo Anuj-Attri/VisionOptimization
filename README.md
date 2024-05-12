@@ -19,7 +19,7 @@
 |Models|CIFAR-10|#Params|
 |:--:|:--:|:--:|
 |[AllCNNC](https://arxiv.org/abs/1412.6806)|93.640|1.4M|
-|[ResNet](https://arxiv.org/abs/1512.03385)|94.465|11.2M|
+|[ResNet](https://arxiv.org/abs/1512.03385)|94.465|4.47M|
 |[ViT](https://arxiv.org/abs/2010.11929)|86.400|--|
 
 
