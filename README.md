@@ -46,6 +46,7 @@
 ## Notes
 * Training notebooks show development in v100 GPU due to its faster efficiency compared to the consumer friendly RTX Models.
 * To avoid fork errors, please define `num_workers=0` in pytorch dataloaders.
+* SOTA Models were considered for pruning but ResNet architecture was chosen for ease of deployment.
 
 ## References
 * All-CNN-C(+BN)[[Springenberg, J.(ICLRW'15)]](https://arxiv.org/abs/1412.6806)
